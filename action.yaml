@@ -24,6 +24,9 @@ inputs:
   command:
     required: true
     description: Scout command to run
+  debug:
+    required: false
+    description: Debug
   image:
     required: true
     description: Image to analyze
