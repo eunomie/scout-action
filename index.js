@@ -20,6 +20,28 @@ function chooseBinary() {
     const platform = os.platform()
     const arch = os.arch()
 
+    if (platform === 'darwin' && arch === 'x64') {
+        return `githubaction-darwin-amd64`
+    }
+    if (platform === 'darwin' && arch === 'arm64') {
+        return `githubaction-darwin-arm64`
+    }
+    if (platform === 'linux' && arch === 'x64') {
+        return `githubaction-linux-amd64`
+    }
+    if (platform === 'linux' && arch === 'arm64') {
+        return `githubaction-linux-arm64`
+    }
+    if (platform === 'win32' && arch === 'x64') {
+        return `githubaction-windows-amd64.exe`
+    }
+    if (platform === 'win32' && arch === 'arm64') {
+        return `githubaction-windows-arm64.exe`
+    }
+
+    console.error(`Unsupported platform (${platform}) and architecture (${arch})`)
+    process.exit(1)
+
     return `githubaction-${platform}-${arch}`
 }
 
