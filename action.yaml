@@ -1,29 +1,12 @@
-# Copyright 2021 Blend Labs, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+name: Docker Scout
+description: List vulnerabilities in images; find better base images and upload an image SBOM to Docker Scout
+author: Docker
 
----
-name: Docker Scout Test
-description: >
-  Test Docker Scout action
-author: Eunomie
 inputs:
-  token:
-    required: true
-    description: Docker PAT
   command:
     required: true
-    description: Scout command to run
+    description: Command to run
   debug:
     required: false
     description: Debug
@@ -32,22 +15,73 @@ inputs:
     description: Image to analyze
   platform:
     required: false
-    description: Platform of the image
+    description: Platform of the image to analyze
   type:
     required: false
     description: Type of image
   ref:
     required: false
     description: Ref if needed
-  toImg:
+  to:
     required: false
-    description: Image to compare
-  toType:
+    description: Image to compare to
+  to-type:
     required: false
     description: Type of image to compare
-  toRef:
+  to-ref:
     required: false
     description: Ref of image to compare
+  to-stream:
+    required: false
+    description: Compare to image in stream
+  to-latest:
+    required: false
+    description: Compare to latest pushed image
+  to-app:
+    required: false
+    description: Name of the application when recording to a stream
+
+  # filter flags
+  ignore-base:
+    required: false
+    description: Ignore vulnerabilities from base image
+  ignore-unchanged:
+    required: false
+    description: Filter out unchanged packages
+  ignore-vex:
+    required: false
+    description: Filter out CVEs that are marked not affected by a VEX statement
+  only-fixed:
+    required: false
+    description: Filter to fixable CVEs
+  only-unfixed:
+    required: false
+    description: Filter to unfixed CVEs
+  only-severities:
+    required: false
+    description: Comma separated list of severities (critical, high, medium, low, unspecified) to filter CVEs by
+  only-package-types:
+    required: false
+    description: Comma separated list of package types (like apk, deb, rpm, npm, pypi, golang, etc)
+  exit-code:
+    required: false
+    description: Return exit code '2' if vulnerability changes are detected
+    default: true
+
+  dockerhub-user:
+    required: false
+    description: Docker Hub User
+  dockerhub-password:
+    required: false
+    description: Docker Hub PAT
+
+  # credentials needed to pull private images
+  registry-user: 
+    description: Registry user to pull images
+    required: false
+  registry-password: 
+    description: Registry password to pull images
+    required: false
 
 runs:
   using: node16
