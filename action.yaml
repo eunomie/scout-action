@@ -83,6 +83,17 @@ inputs:
     description: Registry password to pull images
     required: false
 
+  # comments
+  github-token:
+    description: Required to write comments
+    required: false
+  write-comment:
+    description: Write the output as a Pull Request comment
+    required: false
+  delete-previous-comments:
+    description: Delete comments from the same action before to write a new one
+    required: false
+
 runs:
   using: node16
   main: index.js
