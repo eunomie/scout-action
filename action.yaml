@@ -66,7 +66,7 @@ inputs:
   exit-code:
     required: false
     description: Return exit code '2' if vulnerability changes are detected
-    default: true
+    default: "true"
 
   dockerhub-user:
     required: false
@@ -90,8 +90,9 @@ inputs:
   write-comment:
     description: Write the output as a Pull Request comment
     required: false
-  delete-previous-comments:
-    description: Delete comments from the same action before to write a new one
+    default: "true"
+  keep-previous-comments:
+    description: If set, keep but hide previous comment. If not set, keep and update one single comment per job
     required: false
 
 runs:
