@@ -10,6 +10,11 @@ inputs:
   debug:
     required: false
     description: Debug
+  summary:
+    required: false
+    description: Publish the output as GitHub Action summary
+    default: true
+
   image:
     required: false
     description: Image to analyze
@@ -22,6 +27,8 @@ inputs:
   ref:
     required: false
     description: Ref if needed
+
+  # compare flags
   to:
     required: false
     description: Image to compare to
@@ -66,7 +73,6 @@ inputs:
   exit-code:
     required: false
     description: Return exit code '2' if vulnerability changes are detected
-    default: "true"
 
   dockerhub-user:
     required: false
@@ -85,12 +91,13 @@ inputs:
 
   # comments
   github-token:
-    description: Required to write comments
+    description: "GitHub Token used to authenticate against a repository for Git context"
+    default: ${{ github.token }}
     required: false
   write-comment:
     description: Write the output as a Pull Request comment
     required: false
-    default: "true"
+    default: true
   keep-previous-comments:
     description: If set, keep but hide previous comment. If not set, keep and update one single comment per job
     required: false
